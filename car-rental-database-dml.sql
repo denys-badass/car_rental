@@ -127,3 +127,26 @@ AND employee_id <> (
     FROM employees 
     WHERE first_name like 'Matthew' AND last_name like 'Martinez'
 );
+
+INSERT INTO customers (first_name, last_name, date_of_birth, phone_number, email, address, city, region, passport, driver_license)
+VALUES
+('John', 'Smith', '1990-05-15', '123-456-789', 'john.smith@gmail.com', '123 Alumni Hall', 'New York', 'NY', 'AB123456', 'DL123456'),
+('Emma', 'Johnson', '1985-09-22', '987-654-321', 'emma.johnson@yahoo.com', '456 Sepulveda Blvd', 'Los Angeles', 'CA', 'CD987654', 'DL987654'),
+('Michael', 'Brown', '1982-07-10', '555-123-456', 'michael.brown@hotmail.com', '554 W Diversey', 'Chicago', 'IL', 'EF456789', 'DL456789'),
+('Sarah', 'Davis', '1978-12-03', '555-987-654', 'sarah.davis@outlook.com', '7204-D Southwest Freeway', 'Houston', 'TX', 'GH654321', 'DL654321'),
+('Christopher', 'Wilson', '1993-03-28', '777-123-456', 'christopher.wilson@aol.com', '819 East Pike St', 'Seattle', 'WA', 'IJ234567', 'DL234567'),
+('Jennifer', 'Martinez', '1989-08-17', '777-987-654', 'jennifer.martinez@icloud.com', '371 Washington St', 'Boston', 'MA', 'KL345678', 'DL345678'),
+('James', 'Taylor', '1980-11-05', '333-123-456', 'james.taylor@protonmail.com', '325 Gellert Blvd', 'San Francisco', 'CA', 'MN456789', 'DL456789'),
+('Jessica', 'Anderson', '1987-04-12', '333-987-654', 'jessica.anderson@yandex.com', '2701 N Belt Line RD', 'Dallas', 'TX', 'OP567890', 'DL567890'),
+('Daniel', 'Thomas', '1975-06-20', '888-123-456', 'daniel.thomas@tutanota.com', '1113 Key Plaza', 'Miami', 'FL', 'QR678901', 'DL678901'),
+('Elizabeth', 'Lee', '1984-10-08', '888-987-654', 'elizabeth.lee@protonmail.ch', '1851 S Columbus Blvd', 'Philadelphia', 'PA', 'ST789012', 'DL789012'),
+('William', 'White', '1991-02-14', '222-123-456', 'william.white@fastmail.fm', '200 Lakeline Blvd', 'Austin', 'TX', 'UV890123', 'DL890123'),
+('Ashley', 'Harris', '1986-05-30', '222-987-654', 'ashley.harris@mail.com', '728 SE Washington St', 'Portland', 'OR', 'WX901234', 'DL901234'),
+('David', 'Martin', '1979-09-10', '444-123-456', 'david.martin@inbox.com', '4400 Ashford Dunwoody St', 'Atlanta', 'GA', 'YZ012345', 'DL012345'),
+('Samantha', 'Thompson', '1988-01-25', '444-987-654', 'samantha.thompson@zoho.com', '22 E Ray Road', 'Phoenix', 'AZ', 'AB123456', 'DL123456'),
+('Joseph', 'Garcia', '1983-06-15', '999-123-456', 'joseph.garcia@tutanota.de', '111 Monroe St', 'Detroit', 'MI', 'CD234567', 'DL234567'),
+('Olivia', 'Martinez', '1994-04-02', '999-987-654', 'olivia.martinez@protonmail.com', '132 2nd St', 'Minneapolis', 'MN', 'EF345678', 'DL345678'),
+('Charles', 'Robinson', '1981-12-20', '111-123-456', 'charles.robinson@pm.me', '55 Cornerstar Way', 'Denver', 'CO', 'GH456789', 'DL456789'),
+('Emily', 'Lewis', '1980-08-03', '111-987-654', 'emily.lewis@protonmail.com', '609 N Stephanie St', 'Las Vegas', 'NV', 'IJ567890', 'DL567890'),
+('Matthew', 'Hall', '1990-03-18', '666-123-456', 'matthew.hall@posteo.de', '721 E Independence Blvd', 'Charlotte', 'NC', 'KL678901', 'DL678901'),
+('Sophia', 'Scott', '1985-11-11', '666-987-654', 'sophia.scott@disroot.org', '26 25th Ave NE', 'Seattle', 'WA', 'MN789012', 'DL789012');
