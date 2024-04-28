@@ -151,6 +151,7 @@ VALUES
 ('Matthew', 'Hall', '1990-03-18', '666-123-456', 'matthew.hall@posteo.de', '721 E Independence Blvd', 'Charlotte', 'NC', 'KL678901', 'DL678901'),
 ('Sophia', 'Scott', '1985-11-11', '666-987-654', 'sophia.scott@disroot.org', '26 25th Ave NE', 'Seattle', 'WA', 'MN789012', 'DL789012');
 
+
 INSERT INTO cars (car_type_id, registration_number, vin_code, manufacturer, model, year, color, number_of_seats, fuel_type, transmission, last_inspected_odometer, availability_status, branch_id) 
 VALUES
 ((SELECT car_type_id FROM car_types WHERE car_type = 'Econom'), 'ERS-8579', '1M8GDM9AXKP042788', 'Smart', 'Fortwo', '2021-01-01', 'Silver', 2, 'Gasoline', 'Automatic', 41550, TRUE, 1),
@@ -174,40 +175,329 @@ VALUES
 ((SELECT car_type_id FROM car_types WHERE car_type = 'Premium'), 'C11-ST8', '1G2ZG57B794218686', 'Audi', 'A6', '2022-01-01', 'Black', 5, 'Hybrid', 'Automatic', 50599, TRUE, 1),
 ((SELECT car_type_id FROM car_types WHERE car_type = 'Premium'), 'E33-UV9', '2G1WF52E459279732', 'Tesla', 'Model X', '2023-01-01', 'Blue', 5, 'Electro', 'Automatic', 12146, TRUE, 4);
 
+
 INSERT INTO rentals (car_id, customer_id, start_date, end_date, start_odometer, end_odometer, start_branch, end_branch) 
 VALUES
-(1, 1, '2024-01-05', '2024-01-10', 37867, 39042, 1, 1),
-(1, 2, '2024-01-15', '2024-01-20', 39042, 41073, 1, 1),
-(2, 3, '2024-01-03', '2024-01-08', 25460, 27082, 1, 1),
-(3, 4, '2024-01-12', '2024-01-15', 50112, 53024, 2, 5),
-(3, 1, '2024-01-18', '2024-01-28', 53024, 54012, 5, 2),
-(4, 5, '2024-01-07', '2024-01-12', 18930, 20034, 2, 4),
-(5, 6, '2024-01-10', '2024-01-15', 12028, 13058, 3, 3),
-(6, 7, '2024-01-20', '2024-01-25', 89641, 91743, 1, 3), 
-(7, 8, '2024-01-02', '2024-01-12', 123901, 125837, 5, 4),
-(8, 1, '2024-01-13', '2024-01-23', 44250, 46347, 2, 4),
-(9, 9, '2024-01-05', '2024-01-14', 65886, 68127, 4, 5),
-(10, 10, '2024-01-16', '2024-01-20', 29360, 30258, 2, 1),
-(11, 11, '2024-01-21', '2024-01-30', 87000, 87546, 1, 3),
-(12, 12, '2024-02-02', '2024-02-05', 45601, 46035, 2, 1),
-(13, 1, '2024-02-10', '2024-02-15', 60000, 61259, 3, 3),
-(14, 13, '2024-02-18', '2024-02-25', 10007, 10734, 4, 4),
-(15, 14, '2024-02-28', '2024-03-03', 20012, 21025, 5, 2),
-(16, 1, '2024-03-06', '2024-03-10', 10005, 10512, 1, 1),
-(17, 15, '2024-03-12', '2024-03-17', 30020, 30501, 2, 3),
-(18, 16, '2024-03-20', '2024-03-25', 40009, 41070, 3, 3),
-(19, 17, '2024-03-27', '2024-03-31', 50034, 50599, 4, 1),
-(20, 18, '2024-04-02', '2024-04-08', 11276, 12146, 5, 4),
-(1, 19, '2024-04-10', '2024-04-15', 41073, 41550, 1, 1),
-(2, 20, '2024-04-18', '2024-04-23', 27082, 27852, 1, 5),
-(3, 19, '2024-04-25', '2024-04-30', 54012, 54312, 2, 2),
-(4, 18, '2024-05-03', '2024-05-08', 20034, 20484, 4, 1),
-(5, 17, '2024-05-11', '2024-05-16', 13058, 14015, 3, 3),
-(6, 16, '2024-05-18', '2024-05-23', 91743, NULL, 3, 3),
-(7, 15, '2024-05-25', '2024-05-29', 125837, NULL, 4, 4),
-(8, 14, '2024-06-01', '2024-06-06', 46347, 46592, 4, 2),
-(9, 13, '2024-06-08', '2024-06-13', 68127, NULL, 5, 5),
-(10, 12, '2024-06-15', '2024-06-20', 30258, NULL, 1, 1);
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1M8GDM9AXKP042788'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'John' AND last_name LIKE 'Smith'), 
+    '2024-01-05', 
+    '2024-01-10', 
+    37867, 
+    39042, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1M8GDM9AXKP042788'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Emma' AND last_name LIKE 'Johnson'), 
+    '2024-01-15', 
+    '2024-01-20', 
+    39042, 
+    41073, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE 'JH4KA3260KC007360'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Michael' AND last_name LIKE 'Brown'), 
+    '2024-01-03', 
+    '2024-01-08', 
+    25460, 
+    27082, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1HGCM82633A004352'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Sarah' AND last_name LIKE 'Davis'), 
+    '2024-01-12', 
+    '2024-01-15', 
+    50112, 
+    53024, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Seattle')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1HGCM82633A004352'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'John' AND last_name LIKE 'Smith'), 
+    '2024-01-18', 
+    '2024-01-28', 
+    53024, 
+    54012, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Seattle'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1FAFP4041WF067316'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Christopher' AND last_name LIKE 'Wilson'), 
+    '2024-01-07', 
+    '2024-01-12', 
+    18930, 
+    20034, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Houston')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1HGEM115XSL060792'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Jennifer' AND last_name LIKE 'Martinez'), 
+    '2024-01-10', 
+    '2024-01-15', 
+    12028, 
+    13058, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Chicago'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Chicago')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1G8AJ52F73Z164200'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'James' AND last_name LIKE 'Taylor'), 
+    '2024-01-20', 
+    '2024-01-25', 
+    89641, 
+    91743, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Chicago')
+), 
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1N4AL11D75C109151'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Jessica' AND last_name LIKE 'Anderson'), 
+    '2024-01-02', 
+    '2024-01-12', 
+    123901, 
+    125837, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Seattle'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Houston')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1GNEK13ZX3R298984'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'John' AND last_name LIKE 'Smith'), 
+    '2024-01-13', 
+    '2024-01-23', 
+    44250, 
+    46347, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Houston')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '2G1WF52E459279731'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Daniel' AND last_name LIKE 'Thomas'), 
+    '2024-01-05', 
+    '2024-01-14', 
+    65886, 
+    68127, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Houston'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Seattle')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '2C3KA43R08H129984'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Elizabet' AND last_name LIKE 'Lee'), 
+    '2024-01-16', 
+    '2024-01-20', 
+    29360, 
+    30258, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '19UUA5661DA707070'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'William' AND last_name LIKE 'White'), 
+    '2024-01-21', 
+    '2024-01-30', 
+    87000, 
+    87546, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Chicago')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1FAHP3FN0BW146623'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Ashley' AND last_name LIKE 'Harris'), 
+    '2024-02-02', 
+    '2024-02-05', 
+    45601, 
+    46035, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '3VWFE21C04M000001'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'John' AND last_name LIKE 'Smith'), 
+    '2024-02-10', 
+    '2024-02-15', 
+    60000, 
+    61259, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Chicago'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Chicago')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '5N1AR18U65C768122'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'David' AND last_name LIKE 'Martin'), 
+    '2024-02-18', 
+    '2024-02-25', 
+    10007, 
+    10734, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Houston'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Houston')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1N4AB41D1VC759373'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Samantha' AND last_name LIKE 'Thompson'), 
+    '2024-02-28', 
+    '2024-03-03', 
+    20012, 
+    21025, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Seattle'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1LNHM81WXYV411972'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'John' AND last_name LIKE 'Smith'), 
+    '2024-03-06', 
+    '2024-03-10', 
+    10005, 
+    10512, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '2FTRX18L1XCA01234'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Joseph' AND last_name LIKE 'Garcia'), 
+    '2024-03-12', 
+    '2024-03-17', 
+    30020, 
+    30501, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Chicago')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1B3ES26C75D164896'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Olivia' AND last_name LIKE 'Martinez'), 
+    '2024-03-20', 
+    '2024-03-25', 
+    40009, 
+    41070, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Chicago'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Chicago')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1G2ZG57B794218686'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Charles' AND last_name LIKE 'Robinson'), 
+    '2024-03-27', 
+    '2024-03-31', 
+    50034, 
+    50599, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Houston'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '2G1WF52E459279732'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Emily' AND last_name LIKE 'Lewis'), 
+    '2024-04-02', 
+    '2024-04-08', 
+    11276, 
+    12146, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Seattle'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Houston')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1M8GDM9AXKP042788'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Matthew' AND last_name LIKE 'Hall'), 
+    '2024-04-10', 
+    '2024-04-15', 
+    41073, 
+    41550, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE 'JH4KA3260KC007360'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Sophia' AND last_name LIKE 'Scott'), 
+    '2024-04-18', 
+    '2024-04-23', 
+    27082, 
+    27852, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Seattle')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1HGCM82633A004352'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Matthew' AND last_name LIKE 'Hall'), 
+    '2024-04-25', 
+    '2024-04-30', 
+    54012, 
+    54312, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1FAFP4041WF067316'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Emily' AND last_name LIKE 'Lewis'), 
+    '2024-05-03', 
+    '2024-05-08', 
+    20034, 
+    20484, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Houston'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1HGEM115XSL060792'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Charles' AND last_name LIKE 'Robinson'), 
+    '2024-05-11', 
+    '2024-05-16', 
+    13058, 
+    14015, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Chicago'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Chicago')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1G8AJ52F73Z164200'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Olivia' AND last_name LIKE 'Martinez'), 
+    '2024-05-18', 
+    '2024-05-23', 
+    91743, 
+    NULL, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Chicago'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Chicago')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1N4AL11D75C109151'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Joseph' AND last_name LIKE 'Garcia'), 
+    '2024-05-25', 
+    '2024-05-29', 
+    125837, 
+    NULL,
+    (SELECT branch_id FROM branches WHERE city LIKE 'Houston'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Houston')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '1GNEK13ZX3R298984'),
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Samantha' AND last_name LIKE 'Thompson'), 
+    '2024-06-01', 
+    '2024-06-06', 
+    46347, 
+    46592, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Houston'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '2G1WF52E459279731'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'David' AND last_name LIKE 'Martin'), 
+    '2024-06-08', 
+    '2024-06-13', 
+    68127, 
+    NULL, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Seattle'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'Seattle')
+),
+(
+    (SELECT car_id FROM cars WHERE vin_code LIKE '2C3KA43R08H129984'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Ashley' AND last_name LIKE 'Harris'), 
+    '2024-06-15', 
+    '2024-06-20', 
+    30258, 
+    NULL, 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York'), 
+    (SELECT branch_id FROM branches WHERE city LIKE 'New York')
+);
 
 INSERT INTO agreements (employee_id, rental_id)
 SELECT 
