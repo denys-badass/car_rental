@@ -181,9 +181,9 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '1M8GDM9AXKP042788'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'John' AND last_name LIKE 'Smith'), 
-    '2024-01-05', 
+    '2024-01-07', 
     '2024-01-10', 
-    37867, 
+    38657, 
     39042, 
     (SELECT branch_id FROM branches WHERE city LIKE 'New York'), 
     (SELECT branch_id FROM branches WHERE city LIKE 'New York')
@@ -201,9 +201,9 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE 'JH4KA3260KC007360'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'Michael' AND last_name LIKE 'Brown'), 
-    '2024-01-03', 
+    '2024-01-01', 
     '2024-01-08', 
-    25460, 
+    25960, 
     27082, 
     (SELECT branch_id FROM branches WHERE city LIKE 'New York'), 
     (SELECT branch_id FROM branches WHERE city LIKE 'New York')
@@ -211,9 +211,9 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '1HGCM82633A004352'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'Sarah' AND last_name LIKE 'Davis'), 
-    '2024-01-12', 
+    '2024-01-02', 
     '2024-01-15', 
-    50112, 
+    50512, 
     53024, 
     (SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles'), 
     (SELECT branch_id FROM branches WHERE city LIKE 'Seattle')
@@ -221,7 +221,7 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '1HGCM82633A004352'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'John' AND last_name LIKE 'Smith'), 
-    '2024-01-18', 
+    '2024-01-19', 
     '2024-01-28', 
     53024, 
     54012, 
@@ -231,7 +231,7 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '1FAFP4041WF067316'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'Christopher' AND last_name LIKE 'Wilson'), 
-    '2024-01-07', 
+    '2024-01-03', 
     '2024-01-12', 
     18930, 
     20034, 
@@ -241,9 +241,9 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '1HGEM115XSL060792'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'Jennifer' AND last_name LIKE 'Martinez'), 
-    '2024-01-10', 
+    '2024-01-12', 
     '2024-01-15', 
-    12028, 
+    12728, 
     13058, 
     (SELECT branch_id FROM branches WHERE city LIKE 'Chicago'), 
     (SELECT branch_id FROM branches WHERE city LIKE 'Chicago')
@@ -251,7 +251,7 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '1G8AJ52F73Z164200'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'James' AND last_name LIKE 'Taylor'), 
-    '2024-01-20', 
+    '2024-01-11', 
     '2024-01-25', 
     89641, 
     91743, 
@@ -271,9 +271,9 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '1GNEK13ZX3R298984'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'John' AND last_name LIKE 'Smith'), 
-    '2024-01-13', 
+    '2024-01-19', 
     '2024-01-23', 
-    44250, 
+    45220, 
     46347, 
     (SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles'), 
     (SELECT branch_id FROM branches WHERE city LIKE 'Houston')
@@ -281,16 +281,16 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '2G1WF52E459279731'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'Daniel' AND last_name LIKE 'Thomas'), 
-    '2024-01-05', 
+    '2024-01-12', 
     '2024-01-14', 
-    65886, 
+    67986, 
     68127, 
     (SELECT branch_id FROM branches WHERE city LIKE 'Houston'), 
     (SELECT branch_id FROM branches WHERE city LIKE 'Seattle')
 ),
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '2C3KA43R08H129984'), 
-    (SELECT customer_id FROM customers WHERE first_name LIKE 'Elizabet' AND last_name LIKE 'Lee'), 
+    (SELECT customer_id FROM customers WHERE first_name LIKE 'Elizabeth' AND last_name LIKE 'Lee'), 
     '2024-01-16', 
     '2024-01-20', 
     29360, 
@@ -301,7 +301,7 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '19UUA5661DA707070'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'William' AND last_name LIKE 'White'), 
-    '2024-01-21', 
+    '2024-01-22', 
     '2024-01-30', 
     87000, 
     87546, 
@@ -321,7 +321,7 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '3VWFE21C04M000001'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'John' AND last_name LIKE 'Smith'), 
-    '2024-02-10', 
+    '2024-02-09', 
     '2024-02-15', 
     60000, 
     61259, 
@@ -361,7 +361,7 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '2FTRX18L1XCA01234'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'Joseph' AND last_name LIKE 'Garcia'), 
-    '2024-03-12', 
+    '2024-03-11', 
     '2024-03-17', 
     30020, 
     30501, 
@@ -371,7 +371,7 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '1B3ES26C75D164896'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'Olivia' AND last_name LIKE 'Martinez'), 
-    '2024-03-20', 
+    '2024-03-18', 
     '2024-03-25', 
     40009, 
     41070, 
@@ -401,7 +401,7 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '1M8GDM9AXKP042788'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'Matthew' AND last_name LIKE 'Hall'), 
-    '2024-04-10', 
+    '2024-04-11', 
     '2024-04-15', 
     41073, 
     41550, 
@@ -411,7 +411,7 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE 'JH4KA3260KC007360'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'Sophia' AND last_name LIKE 'Scott'), 
-    '2024-04-18', 
+    '2024-04-17', 
     '2024-04-23', 
     27082, 
     27852, 
@@ -421,7 +421,7 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '1HGCM82633A004352'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'Matthew' AND last_name LIKE 'Hall'), 
-    '2024-04-25', 
+    '2024-04-27', 
     '2024-04-30', 
     54012, 
     54312, 
@@ -431,7 +431,7 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '1FAFP4041WF067316'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'Emily' AND last_name LIKE 'Lewis'), 
-    '2024-05-03', 
+    '2024-05-05', 
     '2024-05-08', 
     20034, 
     20484, 
@@ -451,7 +451,7 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '1G8AJ52F73Z164200'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'Olivia' AND last_name LIKE 'Martinez'), 
-    '2024-05-18', 
+    '2024-05-20', 
     '2024-05-23', 
     91743, 
     NULL, 
@@ -471,7 +471,7 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '1GNEK13ZX3R298984'),
     (SELECT customer_id FROM customers WHERE first_name LIKE 'Samantha' AND last_name LIKE 'Thompson'), 
-    '2024-06-01', 
+    '2024-06-05', 
     '2024-06-06', 
     46347, 
     46592, 
@@ -481,7 +481,7 @@ VALUES
 (
     (SELECT car_id FROM cars WHERE vin_code LIKE '2G1WF52E459279731'), 
     (SELECT customer_id FROM customers WHERE first_name LIKE 'David' AND last_name LIKE 'Martin'), 
-    '2024-06-08', 
+    '2024-06-09', 
     '2024-06-13', 
     68127, 
     NULL, 
