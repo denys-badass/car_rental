@@ -12,120 +12,120 @@ INSERT INTO branches (address, city, region, postal_code, phone_number) VALUES
 ('229 Rainier Ave', 'Seattle', 'WA', '98101', '555-3434');
 
 INSERT INTO employees (branch_id, first_name, last_name, birth_date, address, city, region, email, salary) VALUES 
-((select branch_id from branches where city like 'New York'), 'John', 'Doe', '1990-05-15', '425 Chestnut Avenue', 'New York', 'NY', 'john.doe@car-rental.com', 60000.00),
-((select branch_id from branches where city like 'New York'), 'Jane', 'Smith', '1985-10-20', '223 Walnut Street', 'New York', 'NY', 'jane.smith@car-rental.com', 55000.00),
-((select branch_id from branches where city like 'Los Angeles'), 'Michael', 'Johnson', '1988-03-25', '28 Venice Beach Drive', 'Los Angeles', 'CA', 'michael.johnson@car-rental.com', 62000.00),
-((select branch_id from branches where city like 'Los Angeles'), 'Emily', 'Brown', '1987-07-12', '425 Santa Monica Boulevard', 'Los Angeles', 'CA', 'emily.brown@car-rental.com', 53000.00),
-((select branch_id from branches where city like 'Chicago'), 'Christopher', 'Williams', '1992-09-05', '28 E Grand Ave', 'Chicago', 'IL', 'christopher.williams@car-rental.com', 61000.00),
-((select branch_id from branches where city like 'Chicago'), 'Amanda', 'Jones', '1989-12-10', '25 S Halsted St', 'Chicago', 'IL', 'amanda.jones@car-rental.com', 54000.00),
-((select branch_id from branches where city like 'Houston'), 'Daniel', 'Brown', '1991-02-18', '324 Magnolia St', 'Houston', 'TX', 'daniel.brown@car-rental.com', 62000.00),
-((select branch_id from branches where city like 'Houston'), 'Sarah', 'Miller', '1986-06-30', '21 Willow St', 'Houston', 'TX', 'sarah.miller@car-rental.com', 56000.00),
-((select branch_id from branches where city like 'Seattle'), 'Matthew', 'Martinez', '1990-04-28', '78 Pike St', 'Seattle', 'WA', 'matthew.martinez@car-rental.com', 63000.00),
-((select branch_id from branches where city like 'Seattle'), 'Olivia', 'Taylor', '1988-11-15', '11 Bell St', 'Seattle', 'WA', 'olivia.taylor@car-rental.com', 57000.00),
-((select branch_id from branches where city like 'New York'), 'David', 'Wilson', '1993-08-03', '2021 Spruce Boulevard', 'New York', 'NY', 'david.wilson@car-rental.com', 51000.00),
-((select branch_id from branches where city like 'Los Angeles'), 'Jessica', 'Garcia', '1992-01-20', '122 Beverly Hills Road', 'Los Angeles', 'CA', 'jessica.garcia@car-rental.com', 54000.00),
-((select branch_id from branches where city like 'Chicago'), 'William', 'Rodriguez', '1984-07-29', '19 Lincoln Ave', 'Chicago', 'IL', 'william.rodriguez@car-rental.com', 55000.00),
-((select branch_id from branches where city like 'Houston'), 'Sophia', 'Hernandez', '1985-09-12', '718 Cypress St', 'Houston', 'TX', 'sophia.hernandez@car-rental.com', 58000.00),
-((select branch_id from branches where city like 'Seattle'), 'James', 'Lopez', '1995-03-18', '314 Summit Ave', 'Seattle', 'WA', 'james.lopez@car-rental.com', 52000.00),
-((select branch_id from branches where city like 'New York'), 'Ashley', 'Gonzalez', '1987-12-01', '1819 Birch Drive', 'New York', 'NY', 'ashley.gonzalez@car-rental.com', 55000.00),
-((select branch_id from branches where city like 'Los Angeles'), 'Benjamin', 'Perez', '1990-05-05', '19 Wilshire Boulevard', 'Los Angeles', 'CA', 'benjamin.perez@car-rental.com', 56000.00),
-((select branch_id from branches where city like 'Chicago'), 'Mia', 'Sanchez', '1993-02-14', '516 Belmont Ave,', 'Chicago', 'IL', 'mia.sanchez@car-rental.com', 53000.00),
-((select branch_id from branches where city like 'Houston'), 'Ethan', 'Rivera', '1988-10-08', '738 Sycamore St', 'Houston', 'TX', 'ethan.rivera@car-rental.com', 57000.00),
-((select branch_id from branches where city like 'Seattle'), 'Emma', 'Barnes', '1986-06-25', '2223 Cherry St', 'Seattle', 'WA', 'emma.barnes@car-rental.com', 54000.00),
-((select branch_id from branches where city like 'New York'), 'Alexander', 'Scott', '1991-09-30', '1617 Cedar Court', 'New York', 'NY', 'alexander.scott@car-rental.com', 56000.00),
-((select branch_id from branches where city like 'Los Angeles'), 'Madison', 'Green', '1990-08-22', '516 Rodeo Drive', 'Los Angeles', 'CA', 'madison.green@car-rental.com', 55000.00),
-((select branch_id from branches where city like 'Chicago'), 'Noah', 'Adams', '1989-04-11', '101 State St', 'Chicago', 'IL', 'noah.adams@car-rental.com', 54000.00),
-((select branch_id from branches where city like 'Houston'), 'Chloe', 'Gomez', '1992-11-03', '697 Juniper St', 'Houston', 'TX', 'chloe.gomez@car-rental.com', 58000.00),
-((select branch_id from branches where city like 'Seattle'), 'Elijah', 'Kelly', '1994-01-28', '494 Elm St', 'Seattle', 'WA', 'elijah.kelly@car-rental.com', 52000.00),
-((select branch_id from branches where city like 'New York'), 'Grace', 'Howard', '1985-07-17', '315 Maple Road', 'New York', 'NY', 'grace.howard@car-rental.com', 57000.00),
-((select branch_id from branches where city like 'Los Angeles'), 'Avery', 'Richardson', '1988-12-09', '13 Melrose Place', 'Los Angeles', 'CA', 'avery.richardson@car-rental.com', 56000.00),
-((select branch_id from branches where city like 'Chicago'), 'Logan', 'Myers', '1991-06-27', '34 W Madison St', 'Chicago', 'IL', 'logan.myers@car-rental.com', 55000.00),
-((select branch_id from branches where city like 'Houston'), 'Sofia', 'Diaz', '1987-09-15', '91 Elmwood Dr', 'Houston', 'TX', 'sofia.diaz@car-rental.com', 54000.00),
-((select branch_id from branches where city like 'Seattle'), 'Lucas', 'Russell', '1993-04-19', '435 Fir St', 'Seattle', 'WA', 'lucas.russell@car-rental.com', 59000.00);
+((SELECT branch_id FROM branches WHERE city LIKE 'New York'), 'John', 'Doe', '1990-05-15', '425 Chestnut Avenue', 'New York', 'NY', 'john.doe@car-rental.com', 60000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'New York'), 'Jane', 'Smith', '1985-10-20', '223 Walnut Street', 'New York', 'NY', 'jane.smith@car-rental.com', 55000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles'), 'Michael', 'Johnson', '1988-03-25', '28 Venice Beach Drive', 'Los Angeles', 'CA', 'michael.johnson@car-rental.com', 62000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles'), 'Emily', 'Brown', '1987-07-12', '425 Santa Monica Boulevard', 'Los Angeles', 'CA', 'emily.brown@car-rental.com', 53000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Chicago'), 'Christopher', 'Williams', '1992-09-05', '28 E Grand Ave', 'Chicago', 'IL', 'christopher.williams@car-rental.com', 61000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Chicago'), 'Amanda', 'Jones', '1989-12-10', '25 S Halsted St', 'Chicago', 'IL', 'amanda.jones@car-rental.com', 54000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Houston'), 'Daniel', 'Brown', '1991-02-18', '324 Magnolia St', 'Houston', 'TX', 'daniel.brown@car-rental.com', 62000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Houston'), 'Sarah', 'Miller', '1986-06-30', '21 Willow St', 'Houston', 'TX', 'sarah.miller@car-rental.com', 56000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Seattle'), 'Matthew', 'Martinez', '1990-04-28', '78 Pike St', 'Seattle', 'WA', 'matthew.martinez@car-rental.com', 63000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Seattle'), 'Olivia', 'Taylor', '1988-11-15', '11 Bell St', 'Seattle', 'WA', 'olivia.taylor@car-rental.com', 57000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'New York'), 'David', 'Wilson', '1993-08-03', '2021 Spruce Boulevard', 'New York', 'NY', 'david.wilson@car-rental.com', 51000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles'), 'Jessica', 'Garcia', '1992-01-20', '122 Beverly Hills Road', 'Los Angeles', 'CA', 'jessica.garcia@car-rental.com', 54000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Chicago'), 'William', 'Rodriguez', '1984-07-29', '19 Lincoln Ave', 'Chicago', 'IL', 'william.rodriguez@car-rental.com', 55000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Houston'), 'Sophia', 'Hernandez', '1985-09-12', '718 Cypress St', 'Houston', 'TX', 'sophia.hernandez@car-rental.com', 58000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Seattle'), 'James', 'Lopez', '1995-03-18', '314 Summit Ave', 'Seattle', 'WA', 'james.lopez@car-rental.com', 52000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'New York'), 'Ashley', 'Gonzalez', '1987-12-01', '1819 Birch Drive', 'New York', 'NY', 'ashley.gonzalez@car-rental.com', 55000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles'), 'Benjamin', 'Perez', '1990-05-05', '19 Wilshire Boulevard', 'Los Angeles', 'CA', 'benjamin.perez@car-rental.com', 56000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Chicago'), 'Mia', 'Sanchez', '1993-02-14', '516 Belmont Ave,', 'Chicago', 'IL', 'mia.sanchez@car-rental.com', 53000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Houston'), 'Ethan', 'Rivera', '1988-10-08', '738 Sycamore St', 'Houston', 'TX', 'ethan.rivera@car-rental.com', 57000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Seattle'), 'Emma', 'Barnes', '1986-06-25', '2223 Cherry St', 'Seattle', 'WA', 'emma.barnes@car-rental.com', 54000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'New York'), 'Alexander', 'Scott', '1991-09-30', '1617 Cedar Court', 'New York', 'NY', 'alexander.scott@car-rental.com', 56000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles'), 'Madison', 'Green', '1990-08-22', '516 Rodeo Drive', 'Los Angeles', 'CA', 'madison.green@car-rental.com', 55000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Chicago'), 'Noah', 'Adams', '1989-04-11', '101 State St', 'Chicago', 'IL', 'noah.adams@car-rental.com', 54000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Houston'), 'Chloe', 'Gomez', '1992-11-03', '697 Juniper St', 'Houston', 'TX', 'chloe.gomez@car-rental.com', 58000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Seattle'), 'Elijah', 'Kelly', '1994-01-28', '494 Elm St', 'Seattle', 'WA', 'elijah.kelly@car-rental.com', 52000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'New York'), 'Grace', 'Howard', '1985-07-17', '315 Maple Road', 'New York', 'NY', 'grace.howard@car-rental.com', 57000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles'), 'Avery', 'Richardson', '1988-12-09', '13 Melrose Place', 'Los Angeles', 'CA', 'avery.richardson@car-rental.com', 56000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Chicago'), 'Logan', 'Myers', '1991-06-27', '34 W Madison St', 'Chicago', 'IL', 'logan.myers@car-rental.com', 55000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Houston'), 'Sofia', 'Diaz', '1987-09-15', '91 Elmwood Dr', 'Houston', 'TX', 'sofia.diaz@car-rental.com', 54000.00),
+((SELECT branch_id FROM branches WHERE city LIKE 'Seattle'), 'Lucas', 'Russell', '1993-04-19', '435 Fir St', 'Seattle', 'WA', 'lucas.russell@car-rental.com', 59000.00);
 
 UPDATE employees
 SET reports_to = (
     SELECT employee_id 
     FROM employees 
-    WHERE first_name like 'John' AND last_name like 'Doe'
+    WHERE first_name LIKE 'John' AND last_name LIKE 'Doe'
 )
 WHERE branch_id = (
     SELECT branch_id 
     FROM branches 
-    WHERE city like 'New York'
+    WHERE city LIKE 'New York'
 )
 AND employee_id <> (
     SELECT employee_id 
     FROM employees 
-    WHERE first_name like 'John' AND last_name like 'Doe'
+    WHERE first_name LIKE 'John' AND last_name LIKE 'Doe'
 );
 
 UPDATE employees
 SET reports_to = (
     SELECT employee_id 
     FROM employees 
-    WHERE first_name like 'Michael' AND last_name like 'Johnson'
+    WHERE first_name LIKE 'Michael' AND last_name LIKE 'Johnson'
 )
 WHERE branch_id = (
     SELECT branch_id 
     FROM branches 
-    WHERE city like 'Los Angeles'
+    WHERE city LIKE 'Los Angeles'
 )
 AND employee_id <> (
     SELECT employee_id 
     FROM employees 
-    WHERE first_name like 'Michael' AND last_name like 'Johnson'
+    WHERE first_name LIKE 'Michael' AND last_name LIKE 'Johnson'
 );
 
 UPDATE employees
 SET reports_to = (
     SELECT employee_id 
     FROM employees 
-    WHERE first_name like 'Christopher' AND last_name like 'Williams'
+    WHERE first_name LIKE 'Christopher' AND last_name LIKE 'Williams'
 )
 WHERE branch_id = (
     SELECT branch_id 
     FROM branches 
-    WHERE city like 'Chicago'
+    WHERE city LIKE 'Chicago'
 )
 AND employee_id <> (
     SELECT employee_id 
     FROM employees 
-    WHERE first_name like 'Christopher' AND last_name like 'Williams'
+    WHERE first_name LIKE 'Christopher' AND last_name LIKE 'Williams'
 );
 
 UPDATE employees
 SET reports_to = (
     SELECT employee_id 
     FROM employees 
-    WHERE first_name like 'Daniel' AND last_name like 'Brown'
+    WHERE first_name LIKE 'Daniel' AND last_name LIKE 'Brown'
 )
 WHERE branch_id = (
     SELECT branch_id 
     FROM branches 
-    WHERE city like 'Houston'
+    WHERE city LIKE 'Houston'
 )
 AND employee_id <> (
     SELECT employee_id 
     FROM employees 
-    WHERE first_name like 'Daniel' AND last_name like 'Brown'
+    WHERE first_name LIKE 'Daniel' AND last_name LIKE 'Brown'
 );
 
 UPDATE employees
 SET reports_to = (
     SELECT employee_id 
     FROM employees 
-    WHERE first_name like 'Matthew' AND last_name like 'Martinez'
+    WHERE first_name LIKE 'Matthew' AND last_name LIKE 'Martinez'
 )
 WHERE branch_id = (
     SELECT branch_id 
     FROM branches 
-    WHERE city like 'Seattle'
+    WHERE city LIKE 'Seattle'
 )
 AND employee_id <> (
     SELECT employee_id 
     FROM employees 
-    WHERE first_name like 'Matthew' AND last_name like 'Martinez'
+    WHERE first_name LIKE 'Matthew' AND last_name LIKE 'Martinez'
 );
 
 INSERT INTO customers (first_name, last_name, date_of_birth, phone_number, email, address, city, region, passport, driver_license)
