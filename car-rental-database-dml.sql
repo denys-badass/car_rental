@@ -213,7 +213,7 @@ INSERT INTO agreements (employee_id, rental_id)
 SELECT 
     (SELECT employee_id
      FROM employees
-     WHERE branch_id = r.start_branch
+     WHERE branch_id = r.start_branch AND reports_to IS NOT NULL
      ORDER BY RANDOM()
      LIMIT 1) AS employee_id,
     r.rental_id
