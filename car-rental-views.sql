@@ -1,4 +1,5 @@
 -- 1) View with Conditions: list of all cars that are currently in rent.
+
 CREATE OR REPLACE VIEW active_rentals_view AS
 SELECT 
     r.rental_id,
@@ -13,6 +14,7 @@ WHERE
 
 
 -- 2) View with Joining: current financial indicators for each branch.
+
 CREATE OR REPLACE VIEW branches_financial_performance_view AS
 SELECT
     b.branch_id, 
@@ -28,10 +30,13 @@ JOIN
 JOIN 
     payments AS p USING(agreement_id)
 GROUP BY 
-    b.branch_id;
+    b.branch_id
+ORDER BY
+		SUM(p.total_amount) DESC
 
 
--- 3) View with Subquery: customer history of rentals.
+-- 3) View with Subquery: customer rental history.
+
 CREATE OR REPLACE VIEW customer_rental_history_view AS
 SELECT 
     customer,
@@ -56,7 +61,9 @@ FROM (
 ORDER BY total_rentals DESC;
 
 
--- 4) View with Union: combined view of customer and employees adresses.
+
+-- 4) View with Union: combined view of customer and employees contact information.
+
 CREATE OR REPLACE VIEW combined_addresses_view AS
 SELECT
     first_name || ' ' || last_name AS full_name, 
@@ -79,31 +86,72 @@ FROM
     employees;
 
 
--- 5) Updatable View (editable columns): can update inventory of cars available at each branch
-CREATE VIEW branch_inventory_view AS
+-- 5) Updatable View (editable columns).
+
+-- employees salary management view
+  
+CREATE OR REPLACE VIEW employee_salaries_views AS
 SELECT 
-    car_id, 
-    branch_id AS branch
+	e.first_name,
+	e.last_name,
+	e.salary
+FROM
+	employees e
+	
+
+-- list of employees without confidential salary information
+
+CREATE OR REPLACE VIEW employees_list_view AS
+SELECT 
+	e.employee_id,
+	e.branch_id,
+	e.first_name,
+	e.last_name,
+	e.birth_date,
+	e.address,
+	e.city,
+	e.region,
+	e.email,
+	e.reports_to
 FROM 
-    cars
+	employees e
+
+-- 6) View on the Select from Another View: car availability in different branches, detailed info for New York
+
+CREATE OR REPLACE VIEW branches_inventory_view AS    
+SELECT 
+	c.car_id,
+	c.manufacturer,
+	c.model,
+	c.branch_id,
+	c.availability_status
+FROM 
+	cars c
 WHERE 
-    availability_status = true
-WITH CHECK OPTION;
+  c.availability_status = true
 
-
--- 6) View on the Select from Another View: show avaliable cars from branch_avaliable_view which located in New York
-CREATE VIEW available_cars_in_new_york_view AS
+CREATE OR REPLACE VIEW available_cars_in_new_york_view AS
 SELECT
-    car_id
+    bw.car_id,
+    bw.manufacturer || ' ' ||	bw.model AS car,
+		c.color,
+		c.fuel_type,
+		c.transmission,
+		tp.daily_price
 FROM 
-    branch_inventory_view
+    branches_inventory_view bw
 JOIN
-    branches AS b ON branch = b.branch_id
+    branches b USING(branch_id)
+JOIN
+		cars c USING (car_id)
+JOIN 
+		car_types tp USING (car_type_id)
 WHERE 
-    b.city LIKE 'New York';
+    b.city LIKE 'New York'
 
 
--- 7) View with Check Option: updatable employees.
+-- 7) View with Check Option: updatable employees
+    
 CREATE VIEW high_salary_employees AS
 SELECT *
 FROM 
