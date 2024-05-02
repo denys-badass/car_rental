@@ -150,12 +150,20 @@ WHERE
     b.city LIKE 'New York'
 
 
--- 7) View with Check Option: updatable employees
+-- 7) View with Check Option: updatable cars
     
-CREATE VIEW high_salary_employees AS
-SELECT *
+CREATE OR REPLACE VIEW updatable_car_view AS
+SELECT 
+	c.car_id,
+	c.color,
+	c.manufacturer,
+	c.model,
+	c."year",
+	c.last_inspected_odometer AS odometer,
+	c.branch_id 
 FROM 
-    employees
+	cars AS c
 WHERE 
-    salary > 50000
+	c.year LIKE '20__' AND
+	c.branch_id BETWEEN 1 AND 5
 WITH CHECK OPTION;
