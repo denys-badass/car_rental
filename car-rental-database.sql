@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS cars (
     vin_code VARCHAR(50) UNIQUE NOT NULL,
     manufacturer VARCHAR(50) NOT NULL,
     model VARCHAR(100) NOT NULL,
-    year VARCHAR(4) NOT NULL,
+    year SMALLINT NOT NULL,
     color VARCHAR(50) NOT NULL,
     number_of_seats SMALLINT,
     fuel_type VARCHAR(25) NOT NULL,
