@@ -16,24 +16,45 @@ GRANT ALL ON rentals, employees, payments, agreements TO accountant_role;
 GRANT SELECT, UPDATE, INSERT ON rentals TO regular_employee_role;
 GRANT SELECT ON cars, customers TO regular_employee_role;
 
--- Create policy by branches
-CREATE POLICY ny_policy ON employees, cars 
+-- Create policy on employees by branches
+CREATE POLICY ny_policy ON employees 
     FOR ALL TO ny_role
     USING(branch_id = (SELECT branch_id FROM branches WHERE city LIKE 'New York'));
 
-CREATE POLICY la_policy ON employees, cars 
+CREATE POLICY la_policy ON employees 
     FOR ALL TO la_role
     USING(branch_id = (SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles'));
 
-CREATE POLICY chicago_policy ON employees, cars 
+CREATE POLICY chicago_policy ON employees 
     FOR ALL TO chicago_role
     USING(branch_id = (SELECT branch_id FROM branches WHERE city LIKE 'Chicago'));
 
-CREATE POLICY houston_policy ON employees, cars 
+CREATE POLICY houston_policy ON employees 
     FOR ALL TO houston_role
     USING(branch_id = (SELECT branch_id FROM branches WHERE city LIKE 'Houston'));
 
-CREATE POLICY seattle_policy ON employees, cars 
+CREATE POLICY seattle_policy ON employees 
+    FOR ALL TO seattle_role
+    USING(branch_id = (SELECT branch_id FROM branches WHERE city LIKE 'Seattle'));
+
+-- Create policy on cars by branches
+CREATE POLICY ny_policy ON cars
+    FOR ALL TO ny_role
+    USING(branch_id = (SELECT branch_id FROM branches WHERE city LIKE 'New York'));
+
+CREATE POLICY la_policy ON cars 
+    FOR ALL TO la_role
+    USING(branch_id = (SELECT branch_id FROM branches WHERE city LIKE 'Los Angeles'));
+
+CREATE POLICY chicago_policy ON cars 
+    FOR ALL TO chicago_role
+    USING(branch_id = (SELECT branch_id FROM branches WHERE city LIKE 'Chicago'));
+
+CREATE POLICY houston_policy ON cars
+    FOR ALL TO houston_role
+    USING(branch_id = (SELECT branch_id FROM branches WHERE city LIKE 'Houston'));
+
+CREATE POLICY seattle_policy ON cars 
     FOR ALL TO seattle_role
     USING(branch_id = (SELECT branch_id FROM branches WHERE city LIKE 'Seattle'));
 
