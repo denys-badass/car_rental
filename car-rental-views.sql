@@ -32,7 +32,7 @@ JOIN
 GROUP BY 
     b.branch_id
 ORDER BY
-		SUM(p.total_amount) DESC
+		SUM(p.total_amount) DESC;
 
 
 -- 3) View with Subquery: customer rental history.
@@ -96,7 +96,7 @@ SELECT
 	e.last_name,
 	e.salary
 FROM
-	employees e
+	employees e;
 	
 
 -- list of employees without confidential salary information
@@ -114,7 +114,7 @@ SELECT
 	e.email,
 	e.reports_to
 FROM 
-	employees e
+	employees e;
 
 -- 6) View on the Select from Another View: car availability in different branches, detailed info for New York
 
@@ -128,7 +128,7 @@ SELECT
 FROM 
 	cars c
 WHERE 
-  c.availability_status = true
+  c.availability_status = true;
 
 CREATE OR REPLACE VIEW available_cars_in_new_york_view AS
 SELECT
@@ -147,7 +147,7 @@ JOIN
 JOIN 
 		car_types tp USING (car_type_id)
 WHERE 
-    b.city LIKE 'New York'
+    b.city LIKE 'New York';
 
 
 -- 7) View with Check Option: updatable cars
