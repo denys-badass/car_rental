@@ -1,5 +1,5 @@
 -- Create roles
-CREATE ROLE managers_group;
+CREATE ROLE manager_role;
 
 CREATE ROLE accountant_role;
 CREATE ROLE regular_employee_role;
@@ -11,10 +11,10 @@ CREATE ROLE houston_role;
 CREATE ROLE seattle_role;
 
 -- Assign Grant to roles
-GRANT ALL ON employees, rentals, cars, car_types, customers, agreements, branches  TO managers_group;
+GRANT ALL ON employees, rentals, cars, car_types, customers, agreements, branches TO manager_role;
 GRANT ALL ON rentals, employees, payments, agreements TO accountant_role;
 GRANT SELECT, UPDATE, INSERT ON rentals TO regular_employee_role;
-GRANT SELECT ON cars, customers TO regular_employee_role;
+GRANT SELECT ON cars, customers, branches TO regular_employee_role;
 
 -- Create policy on employees by branches
 CREATE POLICY ny_employee_policy ON employees 
@@ -58,6 +58,11 @@ CREATE POLICY seattle_car_policy ON cars
     FOR ALL TO seattle_role
     USING(branch_id = (SELECT branch_id FROM branches WHERE city LIKE 'Seattle'));
 
+ALTER TABLE employees ENABLE ROW LEVEL SECURITY;
+ALTER TABLE employees FORCE ROW LEVEL SECURITY;
+ALTER TABLE cars ENABLE ROW LEVEL SECURITY;
+ALTER TABLE cars FORCE ROW LEVEL SECURITY;
+
 
 -- Create manager users
 CREATE USER j_doe WITH PASSWORD 'supersecret'; -- NY manager
@@ -92,12 +97,11 @@ CREATE USER o_taylor WITH PASSWORD 'password';
 CREATE USER e_kelly WITH PASSWORD 'password';
 
 -- Grant by roles
-GRANT managers_group TO ny_role, la_role, chicago_role, houston_role, seattle_role;
-GRANT ny_role TO j_doe;
-GRANT la_role TO m_johnson;
-GRANT chicago_role TO c_williams;
-GRANT houston_role TO d_brown;
-GRANT seattle_role TO m_martinez;
+GRANT manager_role, ny_role TO j_doe;
+GRANT manager_role, la_role TO m_johnson;
+GRANT manager_role, chicago_role TO c_williams;
+GRANT manager_role, houston_role TO d_brown;
+GRANT manager_role, seattle_role TO m_martinez;
 
 GRANT accountant_role TO l_pacioli;
 
