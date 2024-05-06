@@ -110,7 +110,3 @@ GRANT regular_employee_role, la_role TO a_richardson, m_green;
 GRANT regular_employee_role, chicago_role TO a_jones, m_sanchez;
 GRANT regular_employee_role, houston_role TO s_miller, e_rivera;
 GRANT regular_employee_role, seattle_role TO o_taylor, e_kelly;
-
-
-
-    
