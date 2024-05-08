@@ -1,7 +1,7 @@
 -- 1) Calculate payment by agreement (multiplying the duration of the rental and daily price of the car type). / scalar function
 
 CREATE OR REPLACE FUNCTION calculate_payment(_agreement_id INT)
-RETURNS DECIMAL(10,2) AS 
+RETURNS DECIMAL(10,5) AS 
 $$
 DECLARE
     payment_amount DECIMAL(10,5);
