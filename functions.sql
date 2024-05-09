@@ -195,7 +195,7 @@ BEGIN
     RETURNING rental_id INTO _rental_id;
 
     _final_odometer = COALESCE(_end_odometer, (SELECT last_inspected_odometer FROM cars WHERE car_id = _car_id));
-    PERFORM update_car_info(_car_id, FALSE, _end_branch, _final_odometer);
+    CALL update_car_info(_car_id, FALSE, _end_branch, _final_odometer);
 
     COMMIT;
 END
