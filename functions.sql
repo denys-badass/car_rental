@@ -105,7 +105,7 @@ CREATE OR REPLACE PROCEDURE add_payment(
 $$
 BEGIN
     INSERT INTO payments(agreement_id, payment_date, total_amount)
-    VALUES (_agreement_id, _payment_date, (select calculate_payment(_agreement_id)));
+    VALUES (_agreement_id, _payment_date, (SELECT calculate_payment(_agreement_id)));
 END
 $$
 LANGUAGE plpgsql;
