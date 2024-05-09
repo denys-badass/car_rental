@@ -16,7 +16,7 @@ BEGIN
     FROM rentals r
     JOIN cars c ON r.car_id = c.car_id
     JOIN car_types ct ON c.car_type_id = ct.car_type_id
-    WHERE r.rental_id = _agreement_id;
+    WHERE r.rental_id = (SELECT rental_id FROM agreements WHERE agreement_id = _agreement_id);
 
     IF payment_amount IS NULL OR payment_amount < 0 THEN
         RAISE EXCEPTION 'Invalid payment amount calculated.';
@@ -105,10 +105,13 @@ CREATE OR REPLACE PROCEDURE add_payment(
 $$
 BEGIN
     INSERT INTO payments(agreement_id, payment_date, total_amount)
-    VALUES (_agreement_id, _payment_date, calculate_payment(_agreement_id));
+    VALUES (_agreement_id, _payment_date, select calculate_payment(_agreement_id));
 END
 $$
 LANGUAGE plpgsql;
+
+-- test
+CALL add_payment(33, '2024-05-09');
 
 -- 5) Update car info in cars. / Update procedure
 
@@ -149,6 +152,9 @@ END
 $$
 LANGUAGE plpgsql;
 
+-- test
+CALL update_car_info(5, TRUE); 
+
 -- 6) Add rentals procedure / Insert procedure with perform another procedure
 
 CREATE OR REPLACE PROCEDURE add_rentals(
@@ -157,12 +163,13 @@ CREATE OR REPLACE PROCEDURE add_rentals(
     _start_date DATE,
     _end_date DATE,
     _end_branch INT,
-    _end_odometer INT DEFAULT NULL
+    _end_odometer INT DEFAULT NULL,
+    inout _rental_id INT DEFAULT NULL
 ) AS
 $$
 DECLARE
-    _rental_id INT;
     _final_odometer INT;
+    
 BEGIN
     IF NOT EXISTS (SELECT car_id FROM cars AS c WHERE car_id = _car_id)
     THEN
@@ -192,7 +199,7 @@ BEGIN
         (SELECT branch_id FROM cars WHERE car_id = _car_id),
         _end_branch
     )
-    RETURNING rental_id INTO _rental_id;
+   	RETURNING rental_id INTO _rental_id;
 
     _final_odometer = COALESCE(_end_odometer, (SELECT last_inspected_odometer FROM cars WHERE car_id = _car_id));
     CALL update_car_info(_car_id, FALSE, _end_branch, _final_odometer);
@@ -201,3 +208,6 @@ BEGIN
 END
 $$
 LANGUAGE plpgsql;
+
+-- test
+CALL add_rentals(5, 17, '2024-05-01', '2024-05-08', 2, 20139);
