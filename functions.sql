@@ -7,8 +7,8 @@ DECLARE
     payment_amount DECIMAL(10,5);
    	rental_id_associated INT;
 BEGIN
-	  SELECT rental_id INTO rental_id_associated FROM agreements WHERE agreement_id = _agreement_id;
-	  IF rental_id_associated IS NULL THEN
+	SELECT rental_id INTO rental_id_associated FROM agreements WHERE agreement_id = _agreement_id;
+	IF rental_id_associated IS NULL THEN
         RAISE EXCEPTION 'No rental found for the given agreement ID.';
     END IF;
    
@@ -28,7 +28,7 @@ $$
 LANGUAGE plpgsql;
 
 -- test:
-SELECT calculate_payment(10)
+SELECT calculate_payment(10);
 
 
 -- 2) All rentals for a given car during a specific year. / table funtion
@@ -54,11 +54,11 @@ $$
 LANGUAGE plpgsql;
 
 -- test
-SELECT * FROM get_agreements_for_car(20, 2024)
+SELECT * FROM get_agreements_for_car(20, 2024);
 
 
 SELECT get.agreement_id, r.start_date, r.end_date, r.customer_id FROM get_agreements_for_car(1, 2024) AS get
-JOIN rentals r USING(rental_id)
+JOIN rentals r USING(rental_id);
 
 
 -- 3) Rental history for a specific customer. / custom type function
@@ -93,7 +93,111 @@ $$
 LANGUAGE plpgsql;
 
 --test
-SELECT * FROM customer_rental_history(1)
+SELECT * FROM customer_rental_history(1);
 
 
+-- 4) Add payments procedure. / Insert procedure
 
+CREATE OR REPLACE PROCEDURE add_payment(
+    _agreement_id INT, 
+    _payment_date DATE
+) AS 
+$$
+BEGIN
+    INSERT INTO payments(agreement_id, payment_date, total_amount)
+    VALUES (_agreement_id, _payment_date, calculate_payment(_agreement_id));
+END
+$$
+LANGUAGE plpgsql;
+
+-- 5) Update car info in cars. / Update procedure
+
+CREATE OR REPLACE PROCEDURE update_car_info(
+    _car_id INT,
+    _availability_status BOOLEAN,
+    _branch_id INT DEFAULT NULL,
+    _last_inspected_odometer INT DEFAULT NULL
+) AS
+$$
+BEGIN
+    IF NOT EXISTS (SELECT car_id FROM cars AS c WHERE car_id = _car_id)
+    THEN
+        RAISE EXCEPTION 'The Car is not exists';
+    END IF;
+    IF _branch_id IS NULL
+    THEN
+        SELECT branch_id INTO _branch_id FROM cars WHERE car_id = _car_id;
+    END IF;
+    IF _last_inspected_odometer IS NULL
+    THEN
+        SELECT last_inspected_odometer INTO _last_inspected_odometer FROM cars WHERE car_id = _car_id;
+    END IF;
+    IF _last_inspected_odometer < (SELECT last_inspected_odometer FROM cars AS c WHERE car_id = _car_id) 
+    THEN
+        RAISE EXCEPTION 'New odometer value cannot be less then last inspected value';
+    END IF;
+
+    UPDATE cars
+        SET 
+            availability_status = _availability_status,
+            branch_id = _branch_id,
+            last_inspected_odometer = _last_inspected_odometer
+        WHERE car_id = _car_id;
+
+    COMMIT;
+END
+$$
+LANGUAGE plpgsql;
+
+-- 6) Add rentals procedure / Insert procedure with perform another procedure
+
+CREATE OR REPLACE PROCEDURE add_rentals(
+    _car_id INT,
+    _customer_id INT,
+    _start_date DATE,
+    _end_date DATE,
+    _end_branch INT,
+    _end_odometer INT DEFAULT NULL
+) AS
+$$
+DECLARE
+    _rental_id INT;
+    _final_odometer INT;
+BEGIN
+    IF NOT EXISTS (SELECT car_id FROM cars AS c WHERE car_id = _car_id)
+    THEN
+        RAISE EXCEPTION 'The Car is not exists';
+    END IF;
+    IF NOT EXISTS (SELECT customer_id FROM customers WHERE customer_id = _customer_id) 
+    THEN
+        RAISE EXCEPTION 'The Customer does not exist';
+    END IF;
+    IF (SELECT availability_status FROM cars AS c WHERE car_id = _car_id) = FALSE
+    THEN
+        RAISE EXCEPTION 'The Car is not avaliable';
+    END IF;
+    IF _start_date >= _end_date 
+    THEN
+        RAISE EXCEPTION 'Start date must be before end date';
+    END IF;
+    
+    INSERT INTO rentals(car_id, customer_id, start_date, end_date, start_odometer, end_odometer, start_branch, end_branch)
+    VALUES (
+        _car_id,
+        _customer_id,
+        _start_date,
+        _end_date,
+        (SELECT last_inspected_odometer FROM cars WHERE car_id = _car_id),
+        _end_odometer,
+        (SELECT branch_id FROM cars WHERE car_id = _car_id),
+        _end_branch
+    )
+    RETURNING rental_id INTO _rental_id;
+
+    _final_odometer = COALESCE(_end_odometer, (SELECT last_inspected_odometer FROM cars WHERE car_id = _car_id));
+    PERFORM update_car_info(_car_id, FALSE, _end_branch, _final_odometer);
+
+    COMMIT;
+END
+$$
+LANGUAGE plpgsql;
