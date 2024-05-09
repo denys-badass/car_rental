@@ -28,7 +28,7 @@ $$
 LANGUAGE plpgsql;
 
 -- test:
-SELECT calculate_payment(10);
+-- SELECT calculate_payment(10);
 
 
 -- 2) All rentals for a given car during a specific year. / table funtion
@@ -54,11 +54,11 @@ $$
 LANGUAGE plpgsql;
 
 -- test
-SELECT * FROM get_agreements_for_car(20, 2024);
+-- SELECT * FROM get_agreements_for_car(20, 2024);
 
 
-SELECT get.agreement_id, r.start_date, r.end_date, r.customer_id FROM get_agreements_for_car(1, 2024) AS get
-JOIN rentals r USING(rental_id);
+-- SELECT get.agreement_id, r.start_date, r.end_date, r.customer_id FROM get_agreements_for_car(1, 2024) AS get
+-- JOIN rentals r USING(rental_id);
 
 
 -- 3) Rental history for a specific customer. / custom type function
@@ -93,7 +93,7 @@ $$
 LANGUAGE plpgsql;
 
 --test
-SELECT * FROM customer_rental_history(1);
+-- SELECT * FROM customer_rental_history(1);
 
 
 -- 4) Add payments procedure. / Insert procedure
@@ -105,13 +105,13 @@ CREATE OR REPLACE PROCEDURE add_payment(
 $$
 BEGIN
     INSERT INTO payments(agreement_id, payment_date, total_amount)
-    VALUES (_agreement_id, _payment_date, select calculate_payment(_agreement_id));
+    VALUES (_agreement_id, _payment_date, (select calculate_payment(_agreement_id)));
 END
 $$
 LANGUAGE plpgsql;
 
 -- test
-CALL add_payment(33, '2024-05-09');
+-- CALL add_payment(33, '2024-05-09');
 
 -- 5) Update car info in cars. / Update procedure
 
@@ -153,7 +153,7 @@ $$
 LANGUAGE plpgsql;
 
 -- test
-CALL update_car_info(5, TRUE); 
+-- CALL update_car_info(5, TRUE); 
 
 -- 6) Add rentals procedure / Insert procedure with perform another procedure
 
@@ -169,7 +169,7 @@ CREATE OR REPLACE PROCEDURE add_rentals(
 $$
 DECLARE
     _final_odometer INT;
-    
+    _is_available BOOLEAN;
 BEGIN
     IF NOT EXISTS (SELECT car_id FROM cars AS c WHERE car_id = _car_id)
     THEN
@@ -187,6 +187,12 @@ BEGIN
     THEN
         RAISE EXCEPTION 'Start date must be before end date';
     END IF;
+    IF _end_date > NOW()
+    THEN
+        _is_available = FALSE;
+    ELSE
+        _is_available = TRUE;
+    END IF;
     
     INSERT INTO rentals(car_id, customer_id, start_date, end_date, start_odometer, end_odometer, start_branch, end_branch)
     VALUES (
@@ -202,12 +208,12 @@ BEGIN
    	RETURNING rental_id INTO _rental_id;
 
     _final_odometer = COALESCE(_end_odometer, (SELECT last_inspected_odometer FROM cars WHERE car_id = _car_id));
-    CALL update_car_info(_car_id, FALSE, _end_branch, _final_odometer);
+    CALL update_car_info(_car_id, _is_available, _end_branch, _final_odometer);
 
-    COMMIT;
 END
 $$
 LANGUAGE plpgsql;
+COMMIT;
 
 -- test
-CALL add_rentals(5, 17, '2024-05-01', '2024-05-08', 2, 20139);
+-- CALL add_rentals(5, 17, '2024-05-01', '2024-05-08', 2, 20139);
