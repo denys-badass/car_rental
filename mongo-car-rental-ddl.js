@@ -62,7 +62,7 @@ db.createCollection("cars", {
                     "bsonType": "bool"
                 },
                 "branch": {
-                    "bsonType": "objectId"
+                    "bsonType": "string"
                 }
             },
             "additionalProperties": false,
@@ -99,6 +99,9 @@ db.createCollection("branches", {
                 "_id": {
                     "bsonType": "objectId"
                 },
+                "branch_code": {
+                    "bsonType": "string"
+                },
                 "address": {
                     "bsonType": "string"
                 },
@@ -118,6 +121,7 @@ db.createCollection("branches", {
             "additionalProperties": false,
             "required": [
                 "_id",
+                "branch_code",
                 "address",
                 "city",
                 "region",
@@ -309,10 +313,10 @@ db.createCollection("rentals", {
                     "bsonType": "string"
                 },
                 "start_branch": {
-                    "bsonType": "objectId"
+                    "bsonType": "string"
                 },
                 "end_branch": {
-                    "bsonType": "objectId"
+                    "bsonType": "string"
                 }
             },
             "additionalProperties": false,
