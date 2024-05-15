@@ -1,6 +1,7 @@
 use car_rentals;
 
 db.createCollection("cars", {
+    "capped": false,
     "validator": {
         "$jsonSchema": {
             "bsonType": "object",
@@ -82,12 +83,14 @@ db.createCollection("cars", {
             ]
         }
     },
+    "validationLevel": "off"
 });
 
 
 
 
 db.createCollection("branches", {
+    "capped": false,
     "validator": {
         "$jsonSchema": {
             "bsonType": "object",
@@ -123,12 +126,15 @@ db.createCollection("branches", {
             ]
         }
     },
+    "validationLevel": "off",
+    "validationAction": "warn"
 });
 
 
 
 
 db.createCollection("customers", {
+    "capped": false,
     "validator": {
         "$jsonSchema": {
             "bsonType": "object",
@@ -182,12 +188,15 @@ db.createCollection("customers", {
             ]
         }
     },
+    "validationLevel": "off",
+    "validationAction": "warn"
 });
 
 
 
 
 db.createCollection("employees", {
+    "capped": false,
     "validator": {
         "$jsonSchema": {
             "bsonType": "object",
@@ -223,8 +232,33 @@ db.createCollection("employees", {
                 "reports_to": {
                     "bsonType": "objectId"
                 },
-                "New Field": {
-                    "bsonType": "string"
+                "branch": {
+                    "bsonType": "object",
+                    "properties": {
+                        "address": {
+                            "bsonType": "string"
+                        },
+                        "city": {
+                            "bsonType": "string"
+                        },
+                        "region": {
+                            "bsonType": "string"
+                        },
+                        "postal_code": {
+                            "bsonType": "string"
+                        },
+                        "phone_number": {
+                            "bsonType": "string"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "address",
+                        "city",
+                        "region",
+                        "postal_code",
+                        "phone_number"
+                    ]
                 }
             },
             "additionalProperties": false,
@@ -239,12 +273,15 @@ db.createCollection("employees", {
             ]
         }
     },
+    "validationLevel": "off",
+    "validationAction": "warn"
 });
 
 
 
 
 db.createCollection("rentals", {
+    "capped": false,
     "validator": {
         "$jsonSchema": {
             "bsonType": "object",
@@ -300,12 +337,15 @@ db.createCollection("rentals", {
             ]
         }
     },
+    "validationLevel": "off",
+    "validationAction": "warn"
 });
 
 
 
 
 db.createCollection("payments", {
+    "capped": false,
     "validator": {
         "$jsonSchema": {
             "bsonType": "object",
@@ -346,4 +386,6 @@ db.createCollection("payments", {
             ]
         }
     },
+    "validationLevel": "off",
+    "validationAction": "warn"
 });
