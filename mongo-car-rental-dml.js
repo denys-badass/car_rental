@@ -1580,8 +1580,8 @@ rentals.forEach(rental => {
 // completed rental example 
     
 db.rentals_test.insertOne({
-    start_date: formatDate("2024-01-07"),
-    end_date: formatDate("2024-01-10"),
+    start_date: "2024-01-07",
+    end_date: "2024-01-10",
     start_odometer: 38657,
     end_odometer: 39042,
     start_branch: "NY-1",
@@ -1603,7 +1603,7 @@ db.rentals_test.insertOne({
       employee_id: "664496daf4fec3962423bd48",
       employee_first_name: "Alexander",
       employee_last_name: "Scott",
-      payment_date: formatDate("2024-01-06"),
+      payment_date: "2024-01-06",
       total_amount: 200.00
     }
   });
