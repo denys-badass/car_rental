@@ -61,7 +61,7 @@ db.createCollection("cars", {
                 "availability_status": {
                     "bsonType": "bool"
                 },
-                "branch": {
+                "branch_id": {
                     "bsonType": "string"
                 }
             },
@@ -79,7 +79,7 @@ db.createCollection("cars", {
                 "fuel_type",
                 "transmission",
                 "availability_status",
-                "branch"
+                "branch_id"
             ]
         }
     },
@@ -99,7 +99,7 @@ db.createCollection("branches", {
                 "_id": {
                     "bsonType": "objectId"
                 },
-                "branch_code": {
+                "branch_id": {
                     "bsonType": "string"
                 },
                 "address": {
@@ -121,7 +121,7 @@ db.createCollection("branches", {
             "additionalProperties": false,
             "required": [
                 "_id",
-                "branch_code",
+                "branch_id",
                 "address",
                 "city",
                 "region",
@@ -153,8 +153,9 @@ db.createCollection("customers", {
                 "last_name": {
                     "bsonType": "string"
                 },
-                "date_of_birth": {
-                    "bsonType": "date"
+                "birth_date": {
+                    "bsonType": "string",
+                    "pattern": "^(\\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
                 },
                 "phone_number": {
                     "bsonType": "string"
@@ -216,7 +217,8 @@ db.createCollection("employees", {
                     "bsonType": "string"
                 },
                 "birth_date": {
-                    "bsonType": "string"
+                    "bsonType": "string",
+                    "pattern": "^(\\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
                 },
                 "address": {
                     "bsonType": "string"
@@ -233,12 +235,12 @@ db.createCollection("employees", {
                 "salary": {
                     "bsonType": "int"
                 },
-                "reports_to": {
-                    "bsonType": "objectId"
-                },
                 "branch": {
                     "bsonType": "object",
                     "properties": {
+                        "branch_id": {
+                            "bsonType": "string"
+                        },
                         "address": {
                             "bsonType": "string"
                         },
@@ -257,6 +259,7 @@ db.createCollection("employees", {
                     },
                     "additionalProperties": false,
                     "required": [
+                        "branch_id",
                         "address",
                         "city",
                         "region",
@@ -294,17 +297,91 @@ db.createCollection("rentals", {
                 "_id": {
                     "bsonType": "objectId"
                 },
-                "car_id": {
-                    "bsonType": "objectId"
+                "car": {
+                    "bsonType": "object",
+                    "properties": {
+                        "_id": {
+                            "bsonType": "objectId"
+                        },
+                        "model": {
+                            "bsonType": "string"
+                        },
+                        "manufacturer": {
+                            "bsonType": "string"
+                        },
+                        "registration_number": {
+                            "bsonType": "string"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "_id",
+                        "model",
+                        "manufacturer",
+                        "registration_number"
+                    ]
                 },
-                "customer_id": {
-                    "bsonType": "objectId"
+                "customer": {
+                    "bsonType": "object",
+                    "properties": {
+                        "_id": {
+                            "bsonType": "objectId"
+                        },
+                        "first_name": {
+                            "bsonType": "string"
+                        },
+                        "last_name": {
+                            "bsonType": "string"
+                        },
+                        "phone_number": {
+                            "bsonType": "string"
+                        },
+                        "email": {
+                            "bsonType": "string"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "_id",
+                        "first_name",
+                        "last_name",
+                        "phone_number"
+                    ]
+                },
+                "agreement": {
+                    "bsonType": "object",
+                    "properties": {
+                        "employee_id": {
+                            "bsonType": "objectId"
+                        },
+                        "employee_first_name": {
+                            "bsonType": "string"
+                        },
+                        "employee_last_name": {
+                            "bsonType": "string"
+                        },
+                        "payment_date": {
+                            "bsonType": "string",
+                            "pattern": "^(\\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+                        },
+                        "total_amount": {
+                            "bsonType": "int"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "employee_id",
+                        "employee_first_name",
+                        "employee_last_name",
+                        "payment_date",
+                        "total_amount"
+                    ]
                 },
                 "start_date": {
-                    "bsonType": "date"
+                    "bsonType": "string"
                 },
                 "end_date": {
-                    "bsonType": "date"
+                    "bsonType": "string"
                 },
                 "start_odometer": {
                     "bsonType": "int"
@@ -324,69 +401,18 @@ db.createCollection("rentals", {
                 "end_branch": [
                     "start_branch"
                 ],
-                "end_date": [
-                    "start_date"
-                ],
                 "end_odometer": [
                     "start_odometer"
                 ]
             },
             "required": [
                 "_id",
-                "car_id",
+                "car",
+                "agreement",
                 "start_date",
                 "end_date",
                 "start_odometer",
                 "start_branch"
-            ]
-        }
-    },
-    "validationLevel": "off",
-    "validationAction": "warn"
-});
-
-
-
-
-db.createCollection("payments", {
-    "capped": false,
-    "validator": {
-        "$jsonSchema": {
-            "bsonType": "object",
-            "title": "payments",
-            "properties": {
-                "_id": {
-                    "bsonType": "objectId"
-                },
-                "agreement": {
-                    "bsonType": "object",
-                    "properties": {
-                        "employee_id": {
-                            "bsonType": "objectId"
-                        },
-                        "rental_id": {
-                            "bsonType": "objectId"
-                        }
-                    },
-                    "additionalProperties": false,
-                    "required": [
-                        "employee_id",
-                        "rental_id"
-                    ]
-                },
-                "payment_date": {
-                    "bsonType": "date"
-                },
-                "total_amount": {
-                    "bsonType": "int"
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "_id",
-                "agreement",
-                "payment_date",
-                "total_amount"
             ]
         }
     },
